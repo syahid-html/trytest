@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ahmad Syahid - Corporate Resume (Mercedes Style)</title>
+
+<!-- Google Font: Orbitron for a futuristic/ROG-inspired look -->
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<!-- Font Awesome Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+    /* --- MERCEDES-INSPIRED COLOR PALETTE --- */
+    :root {
+        --accent-color: #D9D9D9; /* Subtle Silver/Light Gray for contrast */
+        --bg-color: #000000; /* True Black - only visible if video fails */
+        
+        /* CONTENT BACKGROUND: 10% opaque (90% transparent) as requested */
+        --content-bg: rgba(0, 0, 0, 0.1); 
+        
+        /* NAVIGATION BAR: 10% opaque (90% transparent) */
+        --nav-bg-transparent: rgba(0, 0, 0, 0.1); 
+        
+        --text-color: #F5F5F5; /* Off-white for readability */
+        --secondary-text: #AAAAAA; /* Subdued gray for details */
+        --border-color: #333333; /* Clean separator lines */
+    }
+
+    body {
+        margin: 0;
+        font-family: 'Orbitron', sans-serif;
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        overflow-x: hidden;
+        user-select: none;
+        line-height: 1.6;
+        scroll-behavior: smooth; 
+    }
+
+    /* --- FULL-SCREEN VIDEO BACKGROUND STYLES --- */
+    #background-video {
+        position: fixed; 
+        top: 0;
+        left: 0;
+        min-width: 100%;
+        min-height: 100%;
+        width: auto;
+        height: auto;
+        z-index: -2; 
+        object-fit: cover;
+        /* Brightness INCREASED to 120% (1.2) */
+        filter: brightness(1.2);
+    }
+    
+    /* Subtle Dark overlay (40% opaque) for contrast */
+    #video-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.4); /* 40% opacity (60% transparent) */
+        z-index: -1; 
+    }
+
+    /* Full-width sticky top navigation (90% transparent) */
+    .nav-container {
+        position: sticky;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: auto;
+        z-index: 50;
+        background: var(--nav-bg-transparent); 
+        box-shadow: 0 2px 10px rgba(0,0,0,0.7);
+        padding: 0;
+    }
+
+    .nav {
+        display: flex;
+        flex-direction: row; 
+        justify-content: center;
+        padding: 15px 0;
+        margin: 0 auto;
+        max-width: 1200px;
+        overflow-x: auto;
+    }
+
+    .nav::-webkit-scrollbar { height: 3px; }
+
+    .nav-item {
+        flex-shrink: 0;
+        cursor: pointer;
+        padding: 10px 20px;
+        border-bottom: 3px solid transparent; 
+        transition: 0.3s ease-in-out;
+        text-transform: uppercase;
+        color: var(--secondary-text);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 14px;
+        font-weight: 500;
+        white-space: nowrap;
+    }
+
+    .nav-item:hover {
+        color: var(--text-color);
+        border-bottom: 3px solid var(--accent-color);
+    }
+
+    .nav-item.active {
+        color: var(--accent-color);
+        border-bottom: 3px solid var(--accent-color);
+    }
+
+    /* --- CONTENT WRAPPER --- */
+    .content-wrapper {
+        margin: 0; 
+        padding-top: 1px; 
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    /* Content Section Styling: 90% transparent (10% opacity) */
+    .content {
+        width: 100%;
+        max-width: 1000px; 
+        padding: 40px 30px;
+        margin: 0 auto; 
+        background: var(--content-bg); 
+        border-bottom: 1px solid var(--border-color); 
+        box-sizing: border-box;
+        animation: fadeIn 0.8s ease-out;
+        position: relative; 
+        z-index: 10;
+    }
+
+    /* Hero section for personal info (First section) - 90% transparent */
+    #personal {
+        background: var(--content-bg); 
+        padding-top: 100px;
+        padding-bottom: 100px;
+        text-align: center;
+        border-bottom: 3px solid var(--accent-color);
+        overflow: hidden; 
+    }
+    
+    #personal-content-inner {
+        position: relative;
+        z-index: 2;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #socials {
+        margin-bottom: 50px; 
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+    /* Photo and Title Styling */
+    .photo {
+        width: 140px;
+        height: 140px;
+        object-fit: cover;
+        border-radius: 50%;
+        border: 4px solid var(--accent-color);
+        padding: 2px;
+        margin-bottom: 20px;
+        box-shadow: 0 0 10px rgba(217, 217, 217, 0.5);
+    }
+
+    /* Main Section Title */
+    h2 {
+        font-size: 28px;
+        font-weight: 700;
+        color: var(--accent-color);
+        margin-bottom: 25px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid var(--border-color);
+    }
+    
+    /* Sub-Titles (e.g., in Experience/Education) */
+    .section-detail h3 {
+        color: var(--text-color);
+        font-size: 20px;
+        font-weight: 600;
+        margin-top: 0;
+        margin-bottom: 5px;
+        letter-spacing: 0.5px;
+    }
+    .section-detail p {
+        color: var(--secondary-text);
+        margin-bottom: 20px;
+    }
+
+    /* List and Link Styling */
+    ul { list-style: none; padding-left: 0; }
+    ul li { margin-bottom: 10px; padding-left: 20px; position: relative; color: var(--secondary-text); }
+    ul li::before {
+        content: "\f058"; 
+        font-family: "Font Awesome 6 Free";
+        font-weight: 900;
+        color: var(--accent-color);
+        position: absolute;
+        left: 0;
+        top: 2px;
+        font-size: 14px;
+    }
+    a { color: var(--accent-color); text-decoration: none; transition: color 0.2s; }
+    a:hover { text-decoration: underline; color: var(--text-color); }
+
+    /* Personal Info in Hero Section */
+    #personal h1 {
+        font-size: 48px;
+        margin: 0;
+        font-weight: 700;
+        letter-spacing: 3px;
+        color: var(--text-color);
+        text-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+    }
+    #personal p {
+        color: var(--accent-color);
+        font-size: 20px;
+        font-weight: 400; 
+        margin-top: 5px;
+        margin-bottom: 30px;
+    }
+
+    /* Summary text adjusted */
+    #summary p {
+        font-size: 18px; 
+        color: var(--text-color); 
+        font-weight: 400; 
+    }
+    
+    /* --- RESPONSIVE ADJUSTMENTS --- */
+    @media (max-width: 600px) {
+        .nav {
+            justify-content: flex-start;
+            padding: 10px 10px;
+        }
+        .nav-item {
+            padding: 8px 10px;
+            font-size: 12px;
+        }
+        .content {
+            padding: 30px 20px;
+        }
+        #personal h1 {
+            font-size: 36px;
+        }
+        #personal p {
+            font-size: 16px;
+        }
+        h2 {
+            font-size: 24px;
+        }
+    }
+</style>
+</head>
+<body>
+
+<!-- FULL-SCREEN VIDEO BACKGROUND ELEMENT -->
+<!-- NOTE FOR GITHUB: You must upload 'your_coding_background.mp4' and 'your_alternative_background.mp4' 
+     into the same directory as this index.html file for the background video to play. 
+     If the files are not found, the background will remain black (or the fallback color). -->
+<video autoplay loop muted id="background-video">
+    <source src="your_coding_background.mp4" type="video/mp4" 
+            onerror="this.parentElement.style.display='none'; document.body.style.backgroundColor='#000000';">
+    <source src="your_alternative_background.mp4" type="video/mp4" 
+            onerror="this.parentElement.style.display='none'; document.body.style.backgroundColor='#000000';">
+    <source src="your_coding_background.webm" type="video/webm"
+            onerror="this.parentElement.style.display='none'; document.body.style.backgroundColor='#000000';">
+    Your browser does not support the video tag.
+</video>
+
+<!-- Dark Overlay (Fixed, covers the video for contrast) - Updated to 40% opacity -->
+<div id="video-overlay"></div>
+
+
+<!-- STICKY HORIZONTAL NAVIGATION BAR (90% transparent) -->
+<div class="nav-container">
+    <div class="nav">
+        <!-- Logo Text/Item -->
+        <div class="nav-item" onclick="activateSection('personal')" style="font-weight: 700; color: var(--accent-color); border-bottom: none; gap: 4px;">
+            <i class="fa-solid fa-star"></i> AHMAD SYAHID
+        </div>
+        <div class="nav-item" onclick="activateSection('summary')"><i class="fa-solid fa-file-lines"></i> SUMMARY</div>
+        <div class="nav-item" onclick="activateSection('education')"><i class="fa-solid fa-graduation-cap"></i> EDUCATION</div>
+        <div class="nav-item" onclick="activateSection('experience')"><i class="fa-solid fa-briefcase"></i> EXPERIENCE</div>
+        <div class="nav-item" onclick="activateSection('skills')"><i class="fa-solid fa-screwdriver-wrench"></i> SKILLS</div>
+        <div class="nav-item" onclick="activateSection('reference')"><i class="fa-solid fa-users"></i> CONTACT</div>
+    </div>
+</div>
+
+<!-- CONTENT WRAPPER -->
+<div class="content-wrapper">
+    
+    <!-- 1. PERSONAL/HERO SECTION (90% transparent) -->
+    <div id="personal" class="content">
+        <!-- Content Inner (Z-Index 2) -->
+        <div id="personal-content-inner">
+            <!-- Profile picture placeholder -->
+            <img src="https://placehold.co/140x140/D9D9D9/111?text=AS" class="photo" alt="Profile Picture" 
+                onerror="this.onerror=null;this.src='https://placehold.co/140x140/000/fff?text=Photo+Error';">
+            <h1>Ahmad Syahid Hafiz Bin Harun</h1>
+            <p>Diploma in Information Management | Highly Motivated and Adaptable Professional</p>
+
+            <div style="display: flex; justify-content: center; gap: 30px; color: var(--accent-color); font-size: 16px;">
+                <div><i class="fa-solid fa-map-marker-alt"></i> Chemor, Perak</div>
+                <div><i class="fa-solid fa-phone"></i> 011-12109078</div>
+                <div><i class="fa-solid fa-envelope"></i> madsyahid0302@gmail.com</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. SUMMARY (90% transparent) -->
+    <div id="summary" class="content">
+        <h2>Professional Summary</h2>
+        <p style="font-size: 18px; color: var(--text-color); font-weight: 400;">
+            A motivated and adaptable individual with strong problem-solving skills, capable of performing under pressure and completing tasks with discipline and efficiency. With practical experience in high-volume customer service, collaborative teamwork, and physical/digital information management, I am committed to continuous self-improvement and bringing a positive, responsible attitude into any work environment.
+        </p>
+    </div>
+
+    <!-- 3. EDUCATION (90% transparent) -->
+    <div id="education" class="content">
+        <h2>Education</h2>
+        <div class="section-detail">
+            <h3>Diploma in Information Management</h3>
+            <p>Universiti Teknologi MARA (UiTM) | CGPA: 3.03</p>
+        </div>
+        <div class="section-detail">
+            <h3>SPM - 4A</h3>
+            <p>Sekolah Menengah Sains Teluk Intan, Perak | Year: 2023</p>
+        </div>
+    </div>
+
+    <!-- 4. EXPERIENCE (90% transparent) -->
+    <div id="experience" class="content">
+        <h2>Experience</h2>
+        <div class="section-detail">
+            <h3>Cashier / Forecourt - Shell Station Ipoh</h3>
+            <p style="color: var(--accent-color); margin-bottom: 10px;">2023–2024</p>
+            <ul>
+                <li>Managed customer communication with professionalism and clarity during busy periods.</li>
+                <li>Controlled emergency situations on the forecourt effectively, maintaining safety protocols.</li>
+                <li>Solved on-site fuel-related issues and documentation mistakes promptly.</li>
+                <li>Maintained inventory integrity by organizing and efficiently restocking store items.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- 5. SKILLS (90% transparent) -->
+    <div id="skills" class="content">
+        <h2>Core Competencies & Skills</h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+            <ul style="border-right: 1px solid var(--border-color); padding-right: 20px;">
+                <li style="color: var(--text-color);">**Technical & Administration**</li>
+                <li>Microsoft Office Suite (Word, Excel, PowerPoint)</li>
+                <li>Physical & Digital Information Management</li>
+                <li>Records and Documentation Handling</li>
+            </ul>
+            <ul>
+                <li style="color: var(--text-color);">**Professional Attributes**</li>
+                <li>Leadership & Teamwork Proficiency</li>
+                <li>Strong Problem-Solving Capabilities</li>
+                <li>Discipline, Work Ethics, and Time Management</li>
+            </ul>
+        </div>
+    </div>
+    
+    <!-- 6. LANGUAGES (90% transparent) -->
+    <div id="languages" class="content" style="padding-top: 10px;">
+        <h2 style="border-bottom: none; margin-bottom: 10px;">Languages</h2>
+        <div style="display: flex; gap: 40px; color: var(--secondary-text);">
+            <p><strong>Bahasa Melayu:</strong> Native Proficiency</p>
+            <p><strong>English:</strong> Working Proficiency</p>
+        </div>
+    </div>
+
+
+    <!-- 7. REFERENCE & SOCIALS (Combined into one final section - 90% transparent) -->
+    <div id="reference" class="content">
+        <h2>Contact & References</h2>
+        
+        <div style="display: flex; gap: 50px;">
+            <!-- Reference Section -->
+            <div style="flex: 1;">
+                <h3>Professional Reference</h3>
+                <p style="margin-bottom: 5px;"><strong>Noor Syakinah Binti Mohd Ridwan</strong></p>
+                <p style="margin-bottom: 5px; color: var(--secondary-text);">Lecturer – Faculty of Information Management, UiTM</p>
+                <p style="margin-bottom: 5px; color: var(--secondary-text);">Tel: 019-4235649 / 044562550</p>
+                <p><i class="fa-solid fa-envelope" style="color: var(--accent-color);"></i> <a href="mailto:noorsyakinah@uitm.edu.my">noorsyakinah@uitm.edu.my</a></p>
+            </div>
+
+            <!-- Socials Section -->
+            <div style="flex: 1;">
+                <h3>Digital Presence</h3>
+                <p style="margin-bottom: 5px;"><i class="fa-brands fa-instagram" style="color: var(--accent-color);"></i> <strong>Instagram:</strong> <a href="https://www.instagram.com/mrsyafiz" target="_blank">@mrsyafiz</a></p>
+                <p style="margin-bottom: 5px;"><i class="fa-brands fa-facebook" style="color: var(--accent-color);"></i> <strong>Facebook:</strong> <a href="https://www.facebook.com/share/1JEHiCCmM3" target="_blank">Profile Link</a></p>
+            </div>
+        </div>
+    </div>
+    
+    <div id="socials" style="height: 1px;"></div> 
+
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // --- SCROLLSPY LOGIC using Intersection Observer ---
+
+        // Function to update the active state of the navigation items
+        function activateSection(id, isScroll = false) {
+            // 1. Update the 'active' class on the navigation bar
+            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+            const targetNavItem = [...document.querySelectorAll('.nav-item')].find(n => 
+                n.textContent.trim().toUpperCase().includes(id.toUpperCase())
+            );
+            if (targetNavItem) {
+                targetNavItem.classList.add('active');
+            }
+
+            // 2. Handle manual click: smooth scroll to the section
+            if (!isScroll) {
+                const targetSection = document.getElementById(id);
+                if (targetSection) {
+                    // Offset for the sticky header height
+                    const headerHeight = document.querySelector('.nav-container').offsetHeight;
+                    window.scrollTo({
+                        top: targetSection.offsetTop - headerHeight,
+                        behavior: 'smooth'
+                    });
+                }
+            }
+        }
+
+        // Expose function globally so it can be called from onclick attribute in HTML
+        window.activateSection = activateSection;
+        
+        // Setup for Intersection Observer
+        const sections = document.querySelectorAll('.content');
+        
+        // Determines the margin (viewport area) where intersection should occur.
+        const getRootMargin = () => {
+             const headerHeight = document.querySelector('.nav-container').offsetHeight;
+             // Trigger when section top hits the bottom of the sticky header
+             return `-${headerHeight}px 0px -60% 0px`;
+        }
+        
+        let observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.id;
+                    // Pass true to indicate this is a scroll-triggered activation (not a click)
+                    activateSection(id, true);
+                }
+            });
+        }, {
+            rootMargin: getRootMargin(),
+            threshold: 0 // We only care about the intersection point defined by rootMargin
+        });
+        
+        // Function to update the observer settings on resize
+        const updateObserver = () => {
+            if (observer) {
+                observer.disconnect();
+            }
+            observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        activateSection(entry.target.id, true);
+                    }
+                });
+            }, {
+                rootMargin: getRootMargin(),
+                threshold: 0
+            });
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+        };
+
+        // Initial observation setup
+        updateObserver();
+        
+        // Re-calculate observer margin on window resize to handle responsiveness
+        window.addEventListener('resize', updateObserver);
+        
+        // Set the first item active on load, accounting for sticky header height
+        const firstSection = document.getElementById('personal');
+        if (firstSection) {
+            activateSection('personal', false);
+        }
+        // --- END SCROLLSPY LOGIC ---
+    });
+</script>
+
+</body>
+</html>
